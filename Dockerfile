@@ -10,14 +10,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
 
-ENV DB_CONNECTION=array
-ENV APP_KEY=base64:placeholder000000000000000000000000000=
-
-RUN composer install --optimize-autoloader --no-dev --no-interaction
+RUN composer install --optimize-autoloader --no-dev --no-scripts --no-interaction
 RUN npm install && npm run build
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
-CMD php artisan migrate --force && apache2-foreground
+CMD php artisan package:discover --ansi; php artisan migrate --force && apache2-foreground
