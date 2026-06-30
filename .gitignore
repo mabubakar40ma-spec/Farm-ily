@@ -1,0 +1,39 @@
+# Laravel sensitive files
+.env
+.env.*
+!.env.example
+
+# Laravel generated directories
+/vendor
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+
+# Laravel cache and results
+/.phpunit.cache
+/phpunit.result.cache
+
+# IDE/editor settings
+/.idea
+/.vscode
+/.fleet
+/.zed
+/.nova
+/phpactor.json
+
+# Composer auth
+/auth.json
+
+# OS and log files
+.DS_Store
+Thumbs.db
+npm-debug.log
+yarn-error.log
+
+# Homestead or Sail configs
+Homestead.json
+Homestead.yaml
+
