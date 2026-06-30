@@ -3,9 +3,10 @@ RUN apt-get update && apt-get install -y git curl zip unzip libpng-dev libzip-de
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
+RUN rm -f .env && touch database/database.sqlite
 ENV CACHE_DRIVER=file
 ENV SESSION_DRIVER=file
-RUN touch database/database.sqlite
+ENV DB_CONNECTION=mysql
 RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --optimize-autoloader --no-dev --no-scripts --no-interaction
 RUN npm install && npm run build
 RUN chown -R www-data:www-data storage bootstrap/cache
